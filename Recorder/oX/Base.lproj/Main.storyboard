@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1212" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1212" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Gq4-EH-sPD">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -21,17 +21,82 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wkb-dC-xZ6">
-                                <rect key="frame" x="155" y="318" width="64" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="A Button!"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bSU-V1-ogB">
+                                <rect key="frame" x="129" y="126" width="117" height="125"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="117" id="3Ez-gw-v0H"/>
+                                </constraints>
+                                <state key="normal" image="RecordButtonPic"/>
+                                <connections>
+                                    <action selector="RecordFunc:" destination="BYZ-38-t0r" eventType="touchUpInside" id="M0j-xB-RPO"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xmQ-eH-2aP">
+                                <rect key="frame" x="138" y="456" width="99" height="79"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="99" id="URV-gC-L1r"/>
+                                    <constraint firstAttribute="height" constant="79" id="sZ5-ry-g2m"/>
+                                </constraints>
+                                <state key="normal" image="PlayButtonPic"/>
+                                <connections>
+                                    <action selector="PlayFunc:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ZSo-Yq-EId"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IGz-iT-Se3">
+                                <rect key="frame" x="176" y="321" width="22" height="24"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="22" id="xLb-nM-kD8"/>
+                                </constraints>
+                                <state key="normal" title="Button" image="StopButtonPic"/>
+                                <connections>
+                                    <action selector="StopFunc:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Ntq-35-O7V"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="xmQ-eH-2aP" secondAttribute="bottom" constant="132" id="54e-35-KRb"/>
+                            <constraint firstItem="IGz-iT-Se3" firstAttribute="top" secondItem="bSU-V1-ogB" secondAttribute="bottom" constant="70" id="7kA-ie-vKT"/>
+                            <constraint firstItem="bSU-V1-ogB" firstAttribute="centerX" secondItem="IGz-iT-Se3" secondAttribute="centerX" id="Gkt-UW-fhS"/>
+                            <constraint firstItem="IGz-iT-Se3" firstAttribute="centerX" secondItem="xmQ-eH-2aP" secondAttribute="centerX" id="Hib-CW-cQn"/>
+                            <constraint firstItem="bSU-V1-ogB" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="62" id="ZnW-cY-4FC"/>
+                            <constraint firstItem="IGz-iT-Se3" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="ih0-ni-k3g"/>
+                            <constraint firstItem="IGz-iT-Se3" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="v9T-0J-jjX"/>
+                        </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="y1p-ka-Pos"/>
+                    <connections>
+                        <outlet property="PlayBTN" destination="xmQ-eH-2aP" id="a04-ip-XyO"/>
+                        <outlet property="RecordBTN" destination="8bC-Xf-vdC" id="yNj-1r-pab"/>
+                        <outlet property="StopBTN" destination="IGz-iT-Se3" id="3Yk-O5-xfb"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="972" y="37.331334332833585"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="4yF-Oz-CAT">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Gq4-EH-sPD" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="v8u-pJ-Kcg">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="Xpb-3z-c6C"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3cb-gM-a7w" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="32.799999999999997" y="37.331334332833585"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="PlayButtonPic" width="24" height="24"/>
+        <image name="RecordButtonPic" width="24" height="24"/>
+        <image name="StopButtonPic" width="24" height="24"/>
+    </resources>
 </document>
