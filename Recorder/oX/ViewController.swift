@@ -11,8 +11,9 @@ import AVFoundation
 
 class ViewController: UIViewController, AVAudioPlayerDelegate, AVAudioRecorderDelegate {
     
-    var audioPlayer: AVAudioPlayer?
     var audioRecorder: AVAudioRecorder?
+    
+    var soundFileURL: URL?
 
     
     @IBOutlet weak var RecordBTN: UIButton!
@@ -27,7 +28,8 @@ class ViewController: UIViewController, AVAudioPlayerDelegate, AVAudioRecorderDe
         let dirPaths = fileMgr.urls(for: .documentDirectory,
                                     in: .userDomainMask)
         
-        let soundFileURL = dirPaths[0].appendingPathComponent("sound.caf")
+        
+        soundFileURL = dirPaths[0].appendingPathComponent("sound.caf")
         
         let recordSettings =
             [AVEncoderAudioQualityKey: AVAudioQuality.min.rawValue,
@@ -46,7 +48,7 @@ class ViewController: UIViewController, AVAudioPlayerDelegate, AVAudioRecorderDe
         }
         
         do {
-            try audioRecorder = AVAudioRecorder(url: soundFileURL,
+            try audioRecorder = AVAudioRecorder(url: soundFileURL!,
                                                 settings: recordSettings as [String : AnyObject])
             audioRecorder?.prepareToRecord()
         }
@@ -59,44 +61,33 @@ class ViewController: UIViewController, AVAudioPlayerDelegate, AVAudioRecorderDe
         super.didReceiveMemoryWarning()
     }
 
-    
-    @IBAction func RecordFunc(_ sender: AnyObject) {
+    @IBAction func RecordSound(_ sender: Any) {
+        
         if audioRecorder?.isRecording == false {
-            PlayBTN.isEnabled = false
             StopBTN.isEnabled = true
             audioRecorder?.record()
         }
     }
-    @IBAction func StopFunc(_ sender: AnyObject) {
+
+    
+    @IBAction func StopRecording(_ sender: Any) {
         StopBTN.isEnabled = false
-        PlayBTN.isEnabled = true
         RecordBTN.isEnabled = true
-        
+            
         if audioRecorder?.isRecording == true {
             audioRecorder?.stop()
         }
-        else {
-            audioPlayer?.stop()
-        }
+            
+            
+        let URLpath:String = soundFileURL!.path
+        print("VC URL path: ", URLpath)
+        print("")
+        print("")
+
+        self.performSegue(withIdentifier: "MoveToPlay", sender: self)
     }
     
-    @IBAction func PlayFunc(_ sender: AnyObject) {
-        if audioRecorder?.isRecording == false {
-            StopBTN.isEnabled = true
-            RecordBTN.isEnabled = false
-            
-            do {
-                try audioPlayer = AVAudioPlayer(contentsOf:
-                    (audioRecorder?.url)!)
-                audioPlayer!.delegate = self
-                audioPlayer!.prepareToPlay()
-                audioPlayer!.play()
-            }
-            catch let error as NSError {
-                print("audioPlayer error: \(error.localizedDescription)")
-            }
-        }
-    }
+    
     
     func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
         RecordBTN.isEnabled = true
@@ -114,6 +105,15 @@ class ViewController: UIViewController, AVAudioPlayerDelegate, AVAudioRecorderDe
         print("Audio Record Encode Error")
     }
    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.identifier == "MoveToPlay" {
+            let PVC = segue.destination as? PlayViewController
+            PVC?.soundFileURL = self.soundFileURL
+            
+            
+        }
+    }
 }
 
 
